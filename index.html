@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lights Out Game</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .board {
+            border-collapse: collapse;
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+            background-color: #333;
+            cursor: pointer;
+        }
+
+        .on {
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lights Out Game</h1>
+    <form>
+        <label for="size">Board Size:</label>
+        <input type="number" id="size" name="size" min="1" max="10" value="3">
+        <button type="button" id="startBtn">Start Game</button>
+    </form>
+    <div id="board"></div>
+    <div id="message"></div>
+
+    <script>
+        $(document).ready(function () {
+            $('#startBtn').click(function () {
+                var size = parseInt($('#size').val());
+                startGame(size);
+            });
+
+            function startGame(size) {
+                $('#board').empty();
+                $('#message').empty();
+
+                $.getJSON('setup.php', { rows: size, cols: size }, function (data) {
+                    var board = $('<table>').addClass('board');
+                    for (var i = 0; i < size; i++) {
+                        var row = $('<tr>');
+                        for (var j = 0; j < size; j++) {
+                            var box = $('<td>').addClass('box').attr('id', 'box-' + i + '-' + j);
+                            if (data.includes(i + '-' + j)) {
+                                box.addClass('on');
+                            }
+                            box.click(function () {
+                                toggleLight($(this));
+                            });
+                            row.append(box);
+                        }
+                        board.append(row);
+                    }
+                    $('#board').append(board);
+                });
+            }
+
+            function toggleLight(box) {
+                var id = box.attr('id');
+                var coords = id.split('-');
+                var row = parseInt(coords[1]);
+                var col = parseInt(coords[2]);
+                box.toggleClass('on');
+                toggleAdjacentLights(row, col);
+                checkWinCondition();
+            }
+
+            function toggleAdjacentLights(row, col) {
+                var size = parseInt($('#size').val());
+                var adjacentCoords = [
+                    [row - 1, col],
+                    [row + 1, col],
+                    [row, col - 1],
+                    [row, col + 1]
+                ];
+                adjacentCoords.forEach(function (coords) {
+                    var r = coords[0];
+                    var c = coords[1];
+                    if (r >= 0 && r < size && c >= 0 && c < size) {
+                        var box = $('#box-' + r + '-' + c);
+                        box.toggleClass('on');
+                    }
+                });
+            }
+
+            function checkWinCondition() {
+                var allOff = $('.box.on').length === 0;
+                if (allOff) {
+                    $('#message').text('Congratulations! You won!');
+                    $('.box').off('click');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
