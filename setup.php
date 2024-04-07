@@ -5,7 +5,7 @@ $cols = $_GET['cols'];
 $numBoxes = $rows * $cols;
 $startingPositions = [];
 
-if ($numBoxes < 10) {
+if ($numBoxes < 10) { // all lit up
     for ($i = 0; $i < $rows; $i++) {
         for ($j = 0; $j < $cols; $j++) {
             $startingPositions[] = $i . '-' . $j;
@@ -24,4 +24,3 @@ if ($numBoxes < 10) {
 
 header('Content-Type: application/json');
 echo json_encode($startingPositions);
-?>
