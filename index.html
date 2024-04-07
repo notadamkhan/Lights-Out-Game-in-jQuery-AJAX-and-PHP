@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <!-- LINK: https://cs4640.cs.virginia.edu/azk7ad/hw7 -->
     <title>Lights Out</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,14 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
         .board {
             border-collapse: collapse;
         }
@@ -24,21 +33,34 @@
         .on {
             background-color: goldenrod;
         }
+
+        .box:hover {
+            outline: 2px solid rgb(255, 200, 59);
+        }
     </style>
 
 </head>
 
 <body>
-    <h1>Lights Out</h1>
-    <h3>Yellow = Light On, Black = Light Off. Turn off all lights.</h3>
-    <form>
-        <label for="size">Board Size:</label>
-        <input type="number" id="size" name="size" min="1" max="10" value="3">
-        <button type="button" id="startBtn">Start Game</button>
-    </form>
-    <div id="board"></div>
-    <div id="message"></div>
+    <div class="container">
+        <h1>Lights Out</h1>
+        <p>Click the squares to toggle the lights (yellow = on, black = off) and turn off all the lights. Clicking a
+            square
+            also
+            toggles adjacent lights.
+        </p>
+        <form>
+            <div class="input-group mb-0">
+                <input type="number" class="form-control" placeholder="Recipient's username" id="size" name="size"
+                    min="1" max="10" value="5">
+                <button class="btn btn-outline-primary" type="button" id="startBtn">Start Game</button>
+            </div>
+            <div class="form-text mb-3" id="basic-addon4">Board Size</div>
 
+        </form>
+        <div id="board"></div>
+        <div id="message"></div>
+    </div>
     <script>
         $(document).ready(function () {
             $('#startBtn').click(function () {
