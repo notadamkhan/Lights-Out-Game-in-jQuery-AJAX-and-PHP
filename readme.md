@@ -30,3 +30,4 @@ You can play the game [here](https://cs4640.cs.virginia.edu/azk7ad/hw7).
 - JavaScript
 - jQuery
 - PHP
+- [canvas-confetti](https://github.com/catdad/canvas-confetti) for confetti effect
