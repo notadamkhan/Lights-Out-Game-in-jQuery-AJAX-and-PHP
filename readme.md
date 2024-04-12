@@ -1,10 +1,11 @@
-# Lights Out Game
+# [Lights Out Game](https://cs4640.cs.virginia.edu/azk7ad/hw7)
 
 <p align="center">
   <img src="img.png" alt="Lights Out Game" width="600">
 </p>
 
 This is a simple implementation of the classic Lights Out game. The game involves toggling lights on a grid to turn off all the lights. It's implemented using client-side JavaScript and jQuery, with a PHP backend for initial game setup. This game was developed for CS 4640 - Web Programming at the University of Virginia.
+You can play the game [here](https://cs4640.cs.virginia.edu/azk7ad/hw7).
 
 ## How to Play
 
