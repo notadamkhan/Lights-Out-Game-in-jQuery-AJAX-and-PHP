@@ -14,7 +14,7 @@ This is a simple implementation of the classic Lights Out game. The game involve
 ## Game Rules
 
 - Yellow cells represent lights that are on.
-- Black cells represent lights that are off.
+- Blue cells represent lights that are off.
 - Clicking a cell toggles its light and the adjacent lights.
 - The objective is to turn off all the lights on the grid.
 
